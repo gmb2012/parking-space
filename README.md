@@ -2,9 +2,8 @@
 Webapp to share parking spaces
 
 # TO-DO
-- Install SQLLite
+- Connection to database and create table if not exists
 - Implement service layer
-- Add list which parking-space is where => Anette Just used for display
 - Add log of user actions => Text file
 - Check before add booked parking space if is already booked
 - Add hint in case of booking is deleted => please contact the booker to make sure he does not park there
@@ -180,17 +179,17 @@ uuid - VARCHAR(36) NOT NULL
 
 available - DATE NOT NULL 
 
-number - INT UNSIGNED NOT NULL
+number - INT NOT NULL
 
 owner - VARCHAR(256) NOT NULL
 
 booker - VARCHAR(256)
 
-booked - TIMESTAMP
+booked - INT
 
-created - TIMESTAMP default now() tbd in application
+created - INT default now() tbd in application
 
-updated - TIMESTAMP default now() on update now() tbd in application
+updated - INT default now() on update now() tbd in application
 
 ## Index
 Unique index on timestamp and number

@@ -1,1 +1,22 @@
-{}
+{
+  "database": {
+    "file": "/../../database/parking-space.db",
+    "createTable": [
+      "CREATE TABLE IF NOT EXISTS ParkingSpaces (",
+      "uuid CHAR(36) PRIMARY KEY NOT NULL,",
+      "available INT NOT NULL, ",
+      "number INT NOT NULL, ",
+      "owner VARCHAR(256) NOT NULL, ",
+      "booker VARCHAR(256), ",
+      "booked INT, ",
+      "created INT, ",
+      "updated INT",
+      ");"
+    ],
+    "createIndex": [
+      "CREATE UNIQUE INDEX IF NOT EXISTS index_01 on ParkingSpaces (available, number);",
+      "CREATE INDEX IF NOT EXISTS index_02 on ParkingSpaces (owner);",
+      "CREATE INDEX IF NOT EXISTS index_03 on ParkingSpaces (booker);"
+    ]
+  }
+}
