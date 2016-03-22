@@ -1,0 +1,35 @@
+{
+  "name": "parking-space",
+  "version": "1.0.0",
+  "description": "Parking Space Sharing",
+  "scripts": {
+    "start": "NODE_ENV=production webpack -p --debug --progress && nohup node ./javascript/server/server.js &",
+    "dev": "npm run dev:server & npm run dev:client",
+    "dev:client": "webpack --watch",
+    "dev:server": "nodemon --debug ./javascript/server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gmb2012/parking-space.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gmb2012/parking-space/issues"
+  },
+  "homepage": "https://github.com/gmb2012/parking-space#readme",
+  "devDependencies": {
+    "babel": "^5.8.35",
+    "babel-core": "^5.8.35",
+    "babel-loader": "^5.4.0",
+    "nodemon": "^1.9.1",
+    "webpack": "^1.12.14"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "compression": "^1.6.1",
+    "express": "^4.13.4",
+    "json-loader": "^0.5.2",
+    "winston": "^1.1.2"
+  }
+}

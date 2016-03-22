@@ -2,6 +2,7 @@
 Webapp to share parking spaces
 
 # TO-DO
+- Install SQLLite
 - Implement service layer
 - Add list which parking-space is where => Anette Just used for display
 - Add log of user actions => Text file
@@ -173,7 +174,7 @@ Http-Code: 409
 { message: 'offer for parking space was already available' }
 ```
 
-# MySQL-Database
+# SQLLite-Database
 ## Columns
 uuid - VARCHAR(36) NOT NULL
 
@@ -187,9 +188,9 @@ booker - VARCHAR(256)
 
 booked - TIMESTAMP
 
-created - TIMESTAMP default now()
+created - TIMESTAMP default now() tbd in application
 
-updated - TIMESTAMP default now() on update now()
+updated - TIMESTAMP default now() on update now() tbd in application
 
 ## Index
 Unique index on timestamp and number
