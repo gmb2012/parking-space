@@ -17,6 +17,20 @@ app.use(express.static('public'));
 
 // connect to database & create table if not exists => own class
 const dbInstance = new Database(Config.database);
+var bla = dbInstance.insert(
+    {
+        uuid: "12",
+        available: 25,
+        number: 3,
+        owner: "4",
+        booker: "5",
+        booked: 6,
+        created: 7,
+        updated: 8
+    }
+);
+
+bla.then(function() {console.log('gut')}, function(){console.log('mäh')});
 
 app.listen(3000);
 winston.info('Webserver is running on port 3000');

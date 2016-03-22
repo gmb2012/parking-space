@@ -9,14 +9,18 @@
       "owner VARCHAR(256) NOT NULL, ",
       "booker VARCHAR(256), ",
       "booked INT, ",
-      "created INT, ",
-      "updated INT",
+      "created INT NOT NULL, ",
+      "updated INT NOT NULL",
       ");"
     ],
     "createIndex": [
       "CREATE UNIQUE INDEX IF NOT EXISTS index_01 on ParkingSpaces (available, number);",
       "CREATE INDEX IF NOT EXISTS index_02 on ParkingSpaces (owner);",
       "CREATE INDEX IF NOT EXISTS index_03 on ParkingSpaces (booker);"
+    ],
+    "insert": [
+      "INSERT INTO ParkingSpaces (uuid, available, number, owner, booker, booked, created, updated) ",
+      "VALUES ($uuid, $available, $number, $owner, $booker, $booked, $created, $updated)"
     ]
   }
 }

@@ -3,6 +3,8 @@ Webapp to share parking spaces
 
 # TO-DO
 - Connection to database and create table if not exists
+- move all sql statements to config / lightweight orm
+- generic mapping in db class => model class toSQL
 - Implement service layer
 - Add log of user actions => Text file
 - Check before add booked parking space if is already booked
