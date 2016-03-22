@@ -3,6 +3,8 @@ Webapp to share parking spaces
 
 # TO-DO
 - Implement service layer
+- Add list which parking-space is where => Anette Just used for display
+- Add log of user actions => Text file
 
 # REST endpoints
 
@@ -48,4 +50,4 @@ Delete booked parking space from mine
 
 # Database
 ## MySQL
-UUID - Date - Location - Number - Owner - BookedBy - BookedAt
+UUID - Date - Number - Owner - BookedBy - BookedAt
