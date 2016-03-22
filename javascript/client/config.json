@@ -1,1 +1,8 @@
-{}
+{
+  "parking-space-mapping": [
+    { "from": 1, "to": 21, "title": "EG Haus 1 - Nord"},
+    { "from": 22, "to": 41, "title": "EG Haus 2 - Süd"},
+    { "from": 42, "to": 77, "title": "UG Haus 1 - Nord"},
+    { "from": 78, "to": 108, "title": "UG Haus 2 - Süd"}
+  ]
+}
