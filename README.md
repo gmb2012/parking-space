@@ -2,11 +2,15 @@
 Webapp to share parking spaces
 
 # TO-DO
-- Connection to database and create table if not exists
-- add uuid on insert and timestamps
-- move all sql statements to config / lightweight orm
-- generic mapping in db class => model class toSQL
-- Implement service layer
+- endpoints
+  - GET /services/v1/available/:owner:
+  - DELETE /services/v1/available/:uuid:
+  - GET /services/v1/booked/:owner:
+  - DELETE /services/v1/booked/:uuid:
+  - GET /services/v1/bookings/:booker:
+  - POST /services/v1/book/:uuid:
+  - DELETE /services/v1/book/:uuid:
+- improve statement building => lightweight orm & generic mapping in db class => model class toSQL
 - Add log of user actions => Text file
 - Check before add booked parking space if is already booked
 - Add hint in case of booking is deleted => please contact the booker to make sure he does not park there
@@ -98,7 +102,7 @@ n/a
 ```
 
 ## DELETE /services/v1/booked/:uuid:
-Add offer for booked parking space
+Delete offer for booked parking space
 ### Request
 n/a
 ### Response
