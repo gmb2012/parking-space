@@ -9,8 +9,55 @@ function logError(error) {
 function toDBParamters(object) {
     var returnValue = {};
     Object.keys(object).forEach(function(key) { returnValue['$' + key] = object[key]; } );
-    console.log(returnValue);
     return returnValue;
+}
+
+function whereBuilder(filter) {
+    var returnValue = {
+        statement: [],
+        parameter: {},
+    };
+
+    var whereClause = filter.forEach(function(currentFilter) {
+        var statement = currentFilter.field + ' ' + currentFilter.operator;
+
+        if(currentFilter.value) {
+            statement += ' $' + currentFilter.field;
+            returnValue.parameter['$' + currentFilter.field] = currentFilter.value;
+        }
+
+        returnValue.statement.push(statement);
+    });
+
+    return returnValue;
+}
+
+function orderByBuilder(order) {
+    var returnValue = '';
+
+    if(order.field) {
+        returnValue = order.field + ' ' + order.direction;
+    }
+
+    return returnValue
+}
+
+function selectBuilder(select, filter, order) {
+    var where = whereBuilder(filter);
+    var orderBy = orderByBuilder(order);
+
+    if(where.statement.length > 0) {
+        select += ' WHERE ' + where.statement.join(' AND ');
+    }
+
+    if(orderBy.length > 0) {
+        select += ' ORDER BY ' + orderBy;
+    }
+
+    return {
+        statement: select,
+        parameter: where.parameter
+    }
 }
 
 function Database(config) {
@@ -21,6 +68,25 @@ function Database(config) {
         db.run(config.createTable.join(''), logError);
         config.createIndex.forEach(function(index) { db.run(index, logError) });
     });
+
+    this.get = function(filter, order) {
+        var select = selectBuilder(config.select, filter, order);
+        
+        return new Promise(function (resolve, reject) {
+            db.all(
+                select.statement,
+                select.parameter,
+                function(error, rows) {
+                    if(error) {
+                        logError(error);
+                        reject();
+                    } else {
+                        resolve(rows);
+                    }
+                }
+            );
+        });
+    }
 
     this.insert = function(parkingSpace) {
         return new Promise(function (resolve, reject) {

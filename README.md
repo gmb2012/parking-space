@@ -3,6 +3,7 @@ Webapp to share parking spaces
 
 # TO-DO
 - Connection to database and create table if not exists
+- add uuid on insert and timestamps
 - move all sql statements to config / lightweight orm
 - generic mapping in db class => model class toSQL
 - Implement service layer
@@ -25,7 +26,7 @@ Webapp to share parking spaces
 ```
 
 # REST endpoints for someone who would like to offer parking spaces
-## GET /services/v1/available/all
+## GET /services/v1/available
 Get all offered available parking spaces today and in the future ordered by date ASC
 ### Request
 n/a
@@ -44,11 +45,10 @@ n/a
 ```
 
 ## PUT /services/v1/available
-Add offer for available parking space
+Add offer for available parking space 
 ### Request
 ```javascript
  {
-    uuid: '71ca9b30-ed64-42b6-ad4b-aeed810f671d',
     available:   1458604800000, // milliseconds since 01.01.1970 => start of day as GMT
     number: 37,         
     owner: 'Björn'

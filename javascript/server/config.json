@@ -21,6 +21,7 @@
     "insert": [
       "INSERT INTO ParkingSpaces (uuid, available, number, owner, booker, booked, created, updated) ",
       "VALUES ($uuid, $available, $number, $owner, $booker, $booked, $created, $updated)"
-    ]
+    ],
+    "select": "SELECT * FROM ParkingSpaces"
   }
 }
