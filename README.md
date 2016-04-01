@@ -8,7 +8,8 @@ Webapp to share parking spaces
   - GET /services/v1/bookings/:booker:
   - POST /services/v1/book/:uuid:
   - DELETE /services/v1/book/:uuid:
-- improve statement building => lightweight orm & generic mapping in db class => model class toSQL
+- better db handling => move statement handler
+- combine Booking and Offer to Parent Class
 - Add log of user actions => Text file
 - Check before add booked parking space if is already booked
 - Add hint in case of booking is deleted => please contact the booker to make sure he does not park there
