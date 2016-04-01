@@ -3,7 +3,6 @@ Webapp to share parking spaces
 
 # TO-DO
 - endpoints
-  - DELETE /services/v1/available/:uuid:
   - GET /services/v1/booked/:owner:
   - DELETE /services/v1/booked/:uuid:
   - GET /services/v1/bookings/:booker:
@@ -88,7 +87,7 @@ Http-Code: 404
 #### Error - Is booked offer
 Http-Code: 409
 ```javascript
-{ message: 'offer for parking space has been booked and is not available any more' }
+{ message: 'offer for parking space has been booked and is not deletable any more' }
 ```
 
 ## GET /services/v1/booked/:owner:

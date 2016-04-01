@@ -47,6 +47,32 @@ function Offer(db) {
         );
     };
 
+    this.deleteAvailableByUuid = function(req, res) {
+        res.setHeader('Content-Type', 'application/json');
+
+        // check if in db
+        db.select([{ field: 'uuid', operator: '=', value: req.params.uuid }], {})
+        .then(
+            function(result) {
+                // send 404 if not in db
+                if(result.length == 0) {
+                    res.status(404).send({ message: 'offer for parking space not found' });
+                // if already booked 409
+                } else if(result.booker) {
+                    res.status(409).send({ message: 'offer for parking space has been booked and is not deletable any more' });
+                // delete it
+                } else {
+                    db.delete([{ field: 'uuid', operator: '=', value: req.params.uuid }])
+                    .then(
+                        function() { res.send({ message: 'okay' }); },
+                        function() { res.status(500).send({ message: 'error' }); }
+                    );
+                }
+            }
+
+
+        );
+    };
 }
 
 module.exports = Offer;
