@@ -2,6 +2,22 @@ const uuid = require('node-uuid');
 
 function Offer(db) {
 
+    this.getAvailableByOwner = function (req, res) {
+        res.setHeader('Content-Type', 'application/json');
+
+        db.get(
+            [
+                { field: 'owner', operator: '=', value: req.params.owner },
+                { field: 'booker', operator: 'IS NULL' },
+                { field: 'available', operator: '>', value: (new Date().getTime()) - 86400000 }
+            ],
+            { field: 'available', 'direction': 'ASC' }
+        ).then(
+            function(result) { res.send(result); },
+            function() { res.status(500).send({ message: 'error' }); }
+        );
+    };
+
     this.getAllAvailable = function (req, res) {
         res.setHeader('Content-Type', 'application/json');
 

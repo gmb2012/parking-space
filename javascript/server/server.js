@@ -29,6 +29,10 @@ app.put('/services/v1/available', function (req, res) {
     offer.addAvailable(req, res);
 });
 
+app.get('/services/v1/available/:owner', function (req, res) {
+    offer.getAvailableByOwner(req, res);
+});
+
 // book parking space
 
 app.listen(3000);

@@ -3,7 +3,6 @@ Webapp to share parking spaces
 
 # TO-DO
 - endpoints
-  - GET /services/v1/available/:owner:
   - DELETE /services/v1/available/:uuid:
   - GET /services/v1/booked/:owner:
   - DELETE /services/v1/booked/:uuid:
