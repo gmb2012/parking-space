@@ -43,19 +43,25 @@ function orderByBuilder(order) {
 }
 
 function selectBuilder(select, filter, order) {
-    var where = whereBuilder(filter);
+    var statementAndParams = deleteBuilder(select, filter);
     var orderBy = orderByBuilder(order);
 
-    if(where.statement.length > 0) {
-        select += ' WHERE ' + where.statement.join(' AND ');
+    if(orderBy.length > 0) {
+        statementAndParams.statement += ' ORDER BY ' + orderBy;
     }
 
-    if(orderBy.length > 0) {
-        select += ' ORDER BY ' + orderBy;
+    return statementAndParams;
+}
+
+function deleteBuilder(deleteStmt, filter) {
+    var where = whereBuilder(filter);
+
+    if(where.statement.length > 0) {
+        deleteStmt += ' WHERE ' + where.statement.join(' AND ');
     }
 
     return {
-        statement: select,
+        statement: deleteStmt,
         parameter: where.parameter
     }
 }
@@ -69,13 +75,9 @@ function Database(config) {
         config.createIndex.forEach(function(index) { db.run(index, logError) });
     });
 
-    this.get = function(filter, order) {
-        var select = selectBuilder(config.select, filter, order);
-        
+    queryDB = function(statement, parameter) {
         return new Promise(function (resolve, reject) {
-            db.all(
-                select.statement,
-                select.parameter,
+            db.all(statement, parameter,
                 function(error, rows) {
                     if(error) {
                         logError(error);
@@ -86,30 +88,21 @@ function Database(config) {
                 }
             );
         });
+    };
+
+    this.select = function(filter, order) {
+        var select = selectBuilder(config.select, filter, order);
+        return queryDB(select.statement, select.parameter);
     }
 
     this.insert = function(parkingSpace) {
-        return new Promise(function (resolve, reject) {
-            db.run(
-                config.insert.join(''),
-                toDBParamters(parkingSpace),
-                function(error) {
-                    logError(error);
-                    if(error) {
-                        reject();
-                    } else {
-                        resolve();
-                    }
-                }
-            );
-        });
-
-
+        return queryDB(config.insert.join(''), toDBParamters(parkingSpace));
     }
 
-
-
+    this.delete = function(filter) {
+        var deleteStmtAndParams = deleteBuilder(config.delete, filter);
+        return queryDB(deleteStmtAndParams.statement, deleteStmtAndParams.parameter);
+    };
 }
 
 module.exports = Database;
-

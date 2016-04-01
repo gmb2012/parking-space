@@ -1,36 +1,31 @@
 const uuid = require('node-uuid');
 
 function Offer(db) {
+    var defaultGetParams = [
+        { field: 'booker', operator: 'IS NULL' },
+        { field: 'available', operator: '>', value: (new Date().getTime()) - 86400000 }
+    ];
 
-    this.getAvailableByOwner = function (req, res) {
+    var defaultSort = { field: 'available', 'direction': 'ASC' };
+
+
+    get = function(res, filtersToAdd) {
         res.setHeader('Content-Type', 'application/json');
 
-        db.get(
-            [
-                { field: 'owner', operator: '=', value: req.params.owner },
-                { field: 'booker', operator: 'IS NULL' },
-                { field: 'available', operator: '>', value: (new Date().getTime()) - 86400000 }
-            ],
-            { field: 'available', 'direction': 'ASC' }
-        ).then(
+        db.select(defaultGetParams.concat(filtersToAdd), defaultSort)
+        .then(
             function(result) { res.send(result); },
             function() { res.status(500).send({ message: 'error' }); }
         );
     };
 
-    this.getAllAvailable = function (req, res) {
-        res.setHeader('Content-Type', 'application/json');
 
-        db.get(
-            [
-                { field: 'booker', operator: 'IS NULL' },
-                { field: 'available', operator: '>', value: (new Date().getTime()) - 86400000 }
-            ],
-            { field: 'available', 'direction': 'ASC' }
-        ).then(
-            function(result) { res.send(result); },
-            function() { res.status(500).send({ message: 'error' }); }
-        );
+    this.getAvailableByOwner = function (req, res) {
+        get(res, [{ field: 'owner', operator: '=', value: req.params.owner }]);
+    };
+
+    this.getAllAvailable = function (req, res) {
+        get(res, []);
     };
     
     this.addAvailable = function (req, res) {
