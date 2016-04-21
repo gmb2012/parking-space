@@ -7,7 +7,7 @@ function Booking(db) {
     var defaultSort = { field: 'available', 'direction': 'ASC' };
 
 
-    get = function(res, filtersToAdd) {
+    var get = function(res, filtersToAdd) {
         res.setHeader('Content-Type', 'application/json');
 
         db.select(defaultGetParams.concat(filtersToAdd), defaultSort)
