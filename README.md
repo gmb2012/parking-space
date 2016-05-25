@@ -2,13 +2,9 @@
 Webapp to share parking spaces
 
 # TO-DO
-- endpoints
-  - POST /services/v1/book/:uuid
-  - DELETE /services/v1/book/:uuid
 - better db handling => move statement handler
 - combine Booking and Offer to Parent Class
 - Add log of user actions => Text file
-- Check before add booked parking space if is already booked
 - Add hint in case of booking is deleted => please contact the booker to make sure he does not park there
 
 # Data structure of parking space items
@@ -44,7 +40,7 @@ n/a
 [ {parking-space-item}, {parking-space-item}, ... ]
 ```
 
-## PUT /services/v1/available
+## POST /services/v1/available
 Add offer for available parking space 
 ### Request
 ```javascript

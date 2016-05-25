@@ -99,6 +99,11 @@ function Database(config) {
         return queryDB(config.insert.join(''), toDBParamters(parkingSpace));
     }
 
+
+    this.update = function(parkingSpace) {
+        return queryDB(config.update.join(''), toDBParamters(parkingSpace));
+    }
+
     this.delete = function(filter) {
         var deleteStmtAndParams = deleteBuilder(config.delete, filter);
         return queryDB(deleteStmtAndParams.statement, deleteStmtAndParams.parameter);

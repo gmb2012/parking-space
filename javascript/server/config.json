@@ -22,6 +22,11 @@
       "INSERT INTO ParkingSpaces (uuid, available, number, owner, booker, booked, created, updated) ",
       "VALUES ($uuid, $available, $number, $owner, $booker, $booked, $created, $updated)"
     ],
+    "update": [
+      "UPDATE ParkingSpaces SET ",
+      "available = $available, number = $number, owner = $owner, booker = $booker, booked = $booked, updated = $updated ",
+      "WHERE uuid = $uuid"
+    ],
     "select": "SELECT * FROM ParkingSpaces",
     "delete": "DELETE FROM ParkingSpaces"
   }

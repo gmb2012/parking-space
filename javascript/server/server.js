@@ -32,5 +32,8 @@ app.get     ('/services/v1/booked/:owner', function (req, res) { booking.getBook
 app.get     ('/services/v1/booked/:booker', function (req, res) { booking.getBookedByBooker(req, res); });
 app.delete  ('/services/v1/booked/:uuid', function (req, res) { offer.deleteBookedByUuid(req, res); });
 
+app.post  ('/services/v1/book/:uuid', function (req, res) { booking.book(req, res); });
+app.delete  ('/services/v1/book/:uuid', function (req, res) { booking.revoke(req, res); });
+
 app.listen(3000);
 winston.info('Webserver is running on port 3000');
