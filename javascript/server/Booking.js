@@ -40,7 +40,12 @@ function Booking(db) {
                     } else { // update
                         db.update(
                             Object.assign(
-                                req.body, { uuid: req.params.uuid })
+                                req.body,
+                                {
+                                    uuid: req.params.uuid,
+                                    booked: new Date().getTime(),
+                                    updated: new Date().getTime()
+                                })
                             )
                             .then(
                                 function() { res.send({ message: 'okay' }); },
@@ -70,7 +75,8 @@ function Booking(db) {
                                 {
                                     uuid: req.params.uuid,
                                     booker: null,
-                                    booked: null
+                                    booked: null,
+                                    updated: new Date().getTime()
                                 })
                         )
                         .then(
