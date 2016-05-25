@@ -26,8 +26,6 @@ function Booking(db) {
         get(res, [{ field: 'booker', operator: '=', value: req.params.booker }]);
     };
 
-    
-    
     this.book = function (req, res) {
         res.setHeader('Content-Type', 'application/json');
 
@@ -35,21 +33,14 @@ function Booking(db) {
         db.select([{ field: 'uuid', operator: '=', value: req.params.uuid }], {})
             .then(
                 function(result) {
-                    // send 404 if not in db
-                    if(result.length == 0) {
+                    if(result.length == 0) { // send 404 if not in db
                         res.status(404).send({ message: 'offer for parking space not found' });
-                        // if already booked 409
-                    } else if(result.booker) {
+                    } else if(result.booker) { // if already booked 409
                         res.status(409).send({ message: 'offer for parking space has been booked and is not available any more' });
-                        // delete it
-                    } else {
-                        // update
+                    } else { // update
                         db.update(
                             Object.assign(
-                                req.body,
-                                {
-                                    uuid: req.params.uuid
-                                })
+                                req.body, { uuid: req.params.uuid })
                             )
                             .then(
                                 function() { res.send({ message: 'okay' }); },
@@ -67,15 +58,12 @@ function Booking(db) {
         db.select([{ field: 'uuid', operator: '=', value: req.params.uuid }], {})
             .then(
                 function(result) {
-                    // send 404 if not in db
-                    if(result.length == 0) {
+
+                    if(result.length == 0) { // send 404 if not in db
                         res.status(404).send({ message: 'offer for parking space not found' });
-                        // if already booked 409
-                    } else if(!result.booker) {
+                    } else if(!result.booker) { // if already booked 409
                         res.status(409).send({ message: 'offer for parking space was already available' });
-                        // delete it
-                    } else {
-                        // update
+                    } else { // update
                         db.update(
                             Object.assign(
                                 req.body,
@@ -85,10 +73,10 @@ function Booking(db) {
                                     booked: null
                                 })
                         )
-                            .then(
-                                function() { res.send({ message: 'okay' }); },
-                                function() { res.status(500).send({ message: 'error' }); }
-                            );
+                        .then(
+                            function() { res.send({ message: 'okay' }); },
+                            function() { res.status(500).send({ message: 'error' }); }
+                        );
                     }
                 }
             );
@@ -101,14 +89,11 @@ function Booking(db) {
         db.select([{ field: 'uuid', operator: '=', value: req.params.uuid }], {})
         .then(
             function(result) {
-                // send 404 if not in db
-                if(result.length == 0) {
+                if(result.length == 0) { // send 404 if not in db
                     res.status(404).send({ message: 'offer for parking space not found' });
-                // if already booked 409
-                } else if(!result.booker) {
+                } else if(!result.booker) { // if already booked 409
                     res.status(409).send({ message: 'offer for parking space is not booked anymore, please delete via deleteAvailable' });
-                // delete it
-                } else {
+                } else { // delete it
                     db.delete([{ field: 'uuid', operator: '=', value: req.params.uuid }])
                     .then(
                         function() { res.send({ message: 'okay' }); },

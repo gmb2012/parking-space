@@ -27,11 +27,12 @@ app.put     ('/services/v1/available', function (req, res) { offer.addAvailable(
 app.get     ('/services/v1/available/:owner', function (req, res) { offer.getAvailableByOwner(req, res); });
 app.delete  ('/services/v1/available/:uuid', function (req, res) { offer.deleteAvailableByUuid(req, res); });
 
-// book parking space
+// booked parking space
 app.get     ('/services/v1/booked/:owner', function (req, res) { booking.getBookedByOwner(req, res); });
 app.get     ('/services/v1/booked/:booker', function (req, res) { booking.getBookedByBooker(req, res); });
 app.delete  ('/services/v1/booked/:uuid', function (req, res) { offer.deleteBookedByUuid(req, res); });
 
+// book
 app.post  ('/services/v1/book/:uuid', function (req, res) { booking.book(req, res); });
 app.delete  ('/services/v1/book/:uuid', function (req, res) { booking.revoke(req, res); });
 
