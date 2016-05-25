@@ -3,9 +3,8 @@ Webapp to share parking spaces
 
 # TO-DO
 - endpoints
-  - DELETE /services/v1/booked/:uuid:
-  - POST /services/v1/book/:uuid:
-  - DELETE /services/v1/book/:uuid:
+  - POST /services/v1/book/:uuid
+  - DELETE /services/v1/book/:uuid
 - better db handling => move statement handler
 - combine Booking and Offer to Parent Class
 - Add log of user actions => Text file
