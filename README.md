@@ -84,7 +84,7 @@ Http-Code: 409
 { message: 'offer for parking space has been booked and is not deletable any more' }
 ```
 
-## GET /services/v1/booked/:owner:
+## GET /services/v1/booked/owner/:owner:
 Get offered and booked parking spaces by owner today and in the future ordered by date ASC
 ### Request
 n/a
@@ -116,7 +116,7 @@ Http-Code: 409
 ```
 
 # REST endpoints for someone who would like to book parking spaces
-## GET /services/v1/bookings/:booker:
+## GET /services/v1/booked/booker/:booker:
 Get booked parking spaces by booker today and in the future ordered by date ASC
 ### Request
 n/a
