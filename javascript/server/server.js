@@ -23,18 +23,18 @@ const booking = new Booking(dbInstance);
 // webservice endpoints
 // offer parking space
 app.get     ('/services/v1/available', function (req, res) { offer.getAllAvailable(req, res); });
-app.put     ('/services/v1/available', function (req, res) { offer.addAvailable(req, res); });
+app.post     ('/services/v1/available', function (req, res) { offer.addAvailable(req, res); });
 app.get     ('/services/v1/available/:owner', function (req, res) { offer.getAvailableByOwner(req, res); });
 app.delete  ('/services/v1/available/:uuid', function (req, res) { offer.deleteAvailableByUuid(req, res); });
 
 // booked parking space
-app.get     ('/services/v1/booked/:owner', function (req, res) { booking.getBookedByOwner(req, res); });
-app.get     ('/services/v1/booked/:booker', function (req, res) { booking.getBookedByBooker(req, res); });
+app.get     ('/services/v1/booked/owner/:owner', function (req, res) { booking.getBookedByOwner(req, res); });
+app.get     ('/services/v1/booked/booker/:booker', function (req, res) { booking.getBookedByBooker(req, res); });
 app.delete  ('/services/v1/booked/:uuid', function (req, res) { offer.deleteBookedByUuid(req, res); });
 
 // book
 app.post  ('/services/v1/book/:uuid', function (req, res) { booking.book(req, res); });
 app.delete  ('/services/v1/book/:uuid', function (req, res) { booking.revoke(req, res); });
 
-app.listen(3000);
-winston.info('Webserver is running on port 3000');
+app.listen(4000);
+winston.info('Webserver is running on port 4000');

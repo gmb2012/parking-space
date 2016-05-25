@@ -35,7 +35,7 @@ function Booking(db) {
                 function(result) {
                     if(result.length == 0) { // send 404 if not in db
                         res.status(404).send({ message: 'offer for parking space not found' });
-                    } else if(result.booker) { // if already booked 409
+                    } else if(result[0].booker) { // if already booked 409
                         res.status(409).send({ message: 'offer for parking space has been booked and is not available any more' });
                     } else { // update
                         db.update(
@@ -63,10 +63,9 @@ function Booking(db) {
         db.select([{ field: 'uuid', operator: '=', value: req.params.uuid }], {})
             .then(
                 function(result) {
-
                     if(result.length == 0) { // send 404 if not in db
                         res.status(404).send({ message: 'offer for parking space not found' });
-                    } else if(!result.booker) { // if already booked 409
+                    } else if(!result[0].booker) { // if already booked 409
                         res.status(409).send({ message: 'offer for parking space was already available' });
                     } else { // update
                         db.update(

@@ -27,7 +27,7 @@ function Offer(db) {
     this.getAllAvailable = function (req, res) {
         get(res, []);
     };
-    
+
     this.addAvailable = function (req, res) {
         res.setHeader('Content-Type', 'application/json');
 
