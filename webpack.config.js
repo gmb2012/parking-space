@@ -12,7 +12,6 @@ config = {
         extensions: [ '', '.js', '.jsx' ]
     },
     entry: {
-        js: './javascript/client/app.js'
     },
     output: {
         path: targetPath,
