@@ -24,7 +24,7 @@
     ],
     "update": [
       "UPDATE ParkingSpaces SET ",
-      "available = $available, number = $number, owner = $owner, booker = $booker, booked = $booked, updated = $updated ",
+      "booker = $booker, booked = $booked, updated = $updated ",
       "WHERE uuid = $uuid"
     ],
     "select": "SELECT * FROM ParkingSpaces",
